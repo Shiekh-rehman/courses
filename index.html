@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual University of Computer Sciences</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+    }
+    .navbar {
+      background-color: #003366 !important;
+    }
+    .navbar-brand img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    .carousel-item img {
+      height: 500px;
+      object-fit: cover;
+    }
+    .course-card img,
+    .teacher-card img {
+      /* height: 200px; */
+      object-fit: cover;
+      object-position: top;
+    }
+    .card {
+      border: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    footer {
+      background-color: #003366;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="data:image/png;base64,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" alt="Logo">
+        Virtual University of Computer Sciences
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="#courses">Courses</a></li>
+          <li class="nav-item"><a class="nav-link" href="#teachers">Teachers</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Carousel -->
+  <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://avatars.mds.yandex.net/i?id=1ced664a1e35bae79c3eab926e00b0f44e7590ea-5333794-images-thumbs&n=13" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h2>Master Digital Skills</h2>
+          <p>Learn from the best, grow your future.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://avatars.mds.yandex.net/i?id=09d7987643222effdac1f7a94b149d17c12f076c-13020977-images-thumbs&n=13" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h2>Build Websites Like a Pro</h2>
+          <p>Hands-on coding experience included!</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://avatars.mds.yandex.net/i?id=71df9d24b1717fa0d85ddbd7f50bc142ca298c51-11407033-images-thumbs&n=13" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h2>E-Commerce Made Easy</h2>
+          <p>Start your online business today.</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+
+  <!-- About Section -->
+  <section id="about" class="p-5 bg-white text-center">
+    <div class="container">
+      <h2>About Us</h2>
+      <p class="lead">Virtual University of Computer Sciences, Islamabad H9 — bringing you quality tech education online with professional instructors and real-world skills.</p>
+    </div>
+  </section>
+
+  <!-- Courses Section -->
+  <section id="courses" class="p-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Our Courses</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card course-card">
+            <img src="https://avatars.mds.yandex.net/i?id=bc167e58f8fe47e24d9f248400c2c892a734439c-9263927-images-thumbs&n=13" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Digital Marketing</h5>
+              <p class="card-text">Price: Rs. 22,000 (Online)</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card course-card">
+            <img src="https://avatars.mds.yandex.net/i?id=87f539cd9ac19a5fc6622b62bf3fac641a417e00-3909374-images-thumbs&n=13" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Digital Marketing + Shopify E-commerce</h5>
+              <p class="card-text">Price: Rs. 28,000 (Online)</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card course-card">
+            <img src="https://avatars.mds.yandex.net/i?id=f579d6ea6108453cbf457ae00a4e62df2d25f482-5189723-images-thumbs&n=13" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Web Development (HTML, CSS, JS)</h5>
+              <p class="card-text">Price: Rs. 35,000 (Online)</p>
+              <p class="card-text">Project-based learning with frontend tech stack.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teachers Section -->
+  <section id="teachers" class="bg-white p-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Our Teachers</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card teacher-card">
+            <img src="https://avatars.githubusercontent.com/u/111954784?v=4" class="card-img-top" alt="Abdul Rehman">
+            <div class="card-body text-center">
+              <h5 class="card-title">Abdul Rehman</h5>
+              <p class="card-text">Expert in Digital Marketing & Frontend Development</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card teacher-card">
+            <img src="https://avatars.githubusercontent.com/u/4456386?v=4" class="card-img-top" alt="Yasir Ali">
+            <div class="card-body text-center">
+              <h5 class="card-title">Yasir Ali</h5>
+              <p class="card-text">Shopify Expert and E-commerce Trainer</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card teacher-card">
+            <img src="https://avatars.githubusercontent.com/u/63361634?v=4" class="card-img-top" alt="Ayesha Maqbool">
+            <div class="card-body text-center">
+              <h5 class="card-title">Ayesha Maqbool</h5>
+              <p class="card-text">HTML/CSS Instructor & Design Mentor</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="p-5 text-center">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <p class="lead">Visit us at H-9, Islamabad or email: info@vuofcs.edu.pk</p>
+    </div>
+  </section>
+
+  <footer class="text-white text-center p-3">
+    &copy; 2025 Virtual University of Computer Sciences. All rights reserved.
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
