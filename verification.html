@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Verification - Virtual University</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0d47a1, #1976d2);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      background-color: #ffffff;
+      color: #000;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    input[type="text"] {
+      padding: 12px;
+      width: 80%;
+      border: 2px solid #1976d2;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    button {
+      padding: 12px 25px;
+      background-color: #1976d2;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0d47a1;
+    }
+    .student-info {
+      display: none;
+      margin-top: 30px;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .student-info img {
+      width: 100px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      border: 3px solid #1976d2;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    th {
+      background-color: #1976d2;
+      color: white;
+    }
+    td {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 style="color:#1976d2">🎓 Student Verification</h2>
+    <input type="text" id="rollInput" placeholder="Enter Roll Number (e.g. 23785)">
+    <br>
+    <button onclick="verifyStudent()">Verify</button>
+
+    <div class="student-info" id="studentInfo">
+      <img src="" alt="Hamza Khan">
+      <h3>Hamza Khan</h3>
+      <table>
+        <tr>
+          <th>Field</th>
+          <th>Details</th>
+        </tr>
+        <tr>
+          <td>Roll Number</td>
+          <td>23785</td>
+        </tr>
+        <tr>
+          <td>Attendance</td>
+          <td>92%</td>
+        </tr>
+        <tr>
+          <td>Academic Progress</td>
+          <td>Excellent</td>
+        </tr>
+        <tr>
+          <td>Test Marks</td>
+          <td>88 / 100</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function verifyStudent() {
+      const input = document.getElementById('rollInput').value;
+      const info = document.getElementById('studentInfo');
+      if (input === "23785") {
+        info.style.display = 'block';
+      } else {
+        alert("Student not found. Please check the Roll Number.");
+        info.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
