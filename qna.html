@@ -1,0 +1,135 @@
+<style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #eef2f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .chat-container {
+      background: white;
+      width: 350px;
+      height: 500px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .chat-box {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .chat-box .message {
+      margin: 10px 0;
+      max-width: 80%;
+      padding: 10px;
+      border-radius: 10px;
+    }
+    .user {
+      align-self: flex-end;
+      background-color: #4e54c8;
+      color: white;
+    }
+    .bot {
+      align-self: flex-start;
+      background-color: #e0e0e0;
+      color: black;
+    }
+    .buttons {
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      background: #fff;
+      gap: 10px;
+      justify-content: center;
+    }
+    .buttons button {
+      flex: 1 1 45%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #4e54c8;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .buttons button:hover {
+      background: #5c6bc0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="chat-container">
+  <div class="chat-box" id="chat-box">
+    <div class="message bot">Hello! Click a question below 👇</div>
+  </div>
+  <div class="buttons">
+    <button onclick="askQuestion(1)">Fee Discount?</button>
+    <button onclick="askQuestion(2)">Qualification?</button>
+    <button onclick="askQuestion(3)">Average Mind?</button>
+    <button onclick="askQuestion(4)">Certification?</button>
+    <button onclick="askQuestion(5)">Installments?</button>
+    <button onclick="askQuestion(6)">Exams</button>
+    <button onclick="askQuestion(7)">Passing Marks</button>
+  </div>
+</div>
+
+<script>
+  function askQuestion(qNum) {
+    const chatBox = document.getElementById('chat-box');
+
+    let userMsg = document.createElement('div');
+    userMsg.className = 'message user';
+
+    let botMsg = document.createElement('div');
+    botMsg.className = 'message bot';
+
+    if (qNum === 1) {
+      userMsg.textContent = "Q: Kya fee me discount hojaye ga?";
+      botMsg.textContent = "Ans: Yes, WhatsApp par contact karein 03450517154.";
+    } else if (qNum === 2) {
+      userMsg.textContent = "Q: Kya matric/FSC zaroori hai?";
+      botMsg.textContent = "Ans: Nahi, sirf 8th grade tak basic education zaroori hai.";
+    } else if (qNum === 3) {
+      userMsg.textContent = "Q: Kya average mind ka bacha samajh sakta hai?";
+      botMsg.textContent = "Ans: Bilkul! Agar practice aur tasks complete kare to.";
+    } else if (qNum === 4) {
+      userMsg.textContent = "Q: Kya certification milti hai?";
+      botMsg.textContent = "Ans: Ji haan, certification milti hai.";
+    } else if (qNum === 5) {
+      userMsg.textContent = "Q: Kya fee installment mein jama karwa sakte hain?";
+      botMsg.textContent = "Ans: Ji haan, lekin course end se pehle fee clear karni hogi.";
+    }
+    else if (qNum === 6) {
+      userMsg.textContent = "Q: Kya papers hoty hain?";
+      botMsg.textContent = "Ans: Ji haan, papers hote hain. Lekin koi tension nahi hai, hum help karenge.";
+    }
+    else if (qNum === 7) {
+      userMsg.textContent = "Q: Passing Percentage kya hai?";
+      botMsg.textContent = "Ans: Passing percentage 40% hai. Lekin koi tension nahi hai, hum help karenge.";
+    }
+ 
+
+    chatBox.appendChild(userMsg);
+
+    // Typing effect
+    let typing = document.createElement('div');
+    typing.className = 'message bot';
+    typing.textContent = "Typing...";
+    chatBox.appendChild(typing);
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    setTimeout(() => {
+      typing.remove();
+      chatBox.appendChild(botMsg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }, 700);
+  }
+</script>
