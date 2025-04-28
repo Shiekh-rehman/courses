@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exam</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #dbeafe, #e0f2fe);
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 40px;
+        }
+
+        .quiz-container {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            margin-bottom: 25px;
+        }
+
+        .question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .question select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background-color: #f9fafb;
+        }
+
+        .question select:disabled {
+            background-color: #e5e7eb;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 30px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2563eb;
+        }
+
+        .result {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .notification {
+            text-align: center;
+            margin-top: 10px;
+            color: green;
+            font-weight: bold;
+            display: none;
+        }
+
+        #student-info {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Virtual Institute Of Computer Science</h1>
+    <div style="max-width: 800px; margin: 0 auto; background: rgb(255, 255, 255); padding: 20px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 20px;"
+        id="student-info">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 250px;">
+                <p><strong>Student Name:</strong> Hamza Khan Mehmood</p>
+                <p><strong>Father Name:</strong> Shahid Mehmood</p>
+                <p><strong>Class:</strong> Web Development</p>
+                <p><strong>Teacher:</strong> Sir.Abdul Rehman Kamal</p>
+                <p><strong>Institute:</strong> Virtual Institute Of Computer Science</p>
+                <p><strong>Date:</strong> <span id="current-date"></span></p>
+            </div>
+            <div>
+                <img src="https://virtualuni.netlify.app/std%20img.jpeg" alt="Student Image"
+                    style="width: 150px; height: auto; border-radius: 10px;" />
+            </div>
+        </div>
+    </div>
+    <div id="instructions"
+    style="max-width: 800px; margin: 20px auto; background-color: #fef3c7; padding: 20px; border-radius: 10px; border-left: 6px solid #f59e0b;">
+    <h2 style="margin-top: 0; color: #92400e;">📋 Quiz Instructions</h2>
+    <ul style="padding-left: 20px; color: #78350f;">
+        <li>Quiz mein total <strong>41 questions</strong> honge.</li>
+        <li>Har question ka sirf ek correct answer hai.</li>
+        <li>Answer select karne ke baad woh lock ho jayega – dobara change nahi hoga.</li>
+        <li>Har correct answer ke saath "Correct!" ka message show hoga.</li>
+        <li>Submit karne ke baad result pop-up mein dikhai dega. uska screenshot le kr instructer ko send krien.</li>
+        <li>Passing criteria: <strong>55%</strong> marks.</li>
+        <li>Apna roll number sahi se enter karna zaroori hai warna access nahi milega.</li>
+    </ul>
+</div>
+
+
+    <h1>Paper #1</h1>
+
+    <div id="roll-number-prompt"></div>
+    <div class="quiz-container" id="quiz-container"></div>
+    <button onclick="submitQuiz()" id="submitBtn" style="display:none;">Submit</button>
+    <div class="result" id="result"></div>
+
+    <script>
+        const allOptions = [
+            "Hyper Text Markup Language", "Cascading Style Sheets", "JavaScript",
+            "Data temporarily store karne ke liye", "SSD", "link", "CSS",
+            "Andar ki space barhti ha", "Bahar ki space barhti ha", "Elements line me ajaty hn",
+            "background-color", "color", "hover", "line break k liye", "Inline CSS likhne k liye",
+            ".classname", "Style ya JS use k liye", "font-family", "Frontend Backend Database",
+            "Online presence k liye", "Link dene k liye", "Clickable button bnta ha",
+            "Link ka URL", "Image ya video ka path", "Current folder ka path", "Yes",
+            "Limited", "Paragraph bnta ha", "Paragraph", "Unordered List", "Ordered List",
+            "List Item", "Structure clear krne k liye", "Search Display Social", "8", "40",
+            "Nahi agar practice ho", "Corners gol krne k liye", "border", "border: none", "img"
+        ];
+
+        const questions = [
+            ["HTML full form", "Hyper Text Markup Language"],
+            ["CSS full form", "Cascading Style Sheets"],
+            ["JS full form", "JavaScript"],
+            ["Memory kisliye hoti ha", "Data temporarily store karne ke liye"],
+            ["SSD fast ha ya Hard?", "SSD"],
+            ["HTML me CSS ki file link krne k liye kon sa tag?", "link"],
+            ["Styling k liye CSS hoti ya koi aur?", "CSS"],
+            ["Padding se kya hota?", "Andar ki space barhti ha"],
+            ["Margin se kya hota?", "Bahar ki space barhti ha"],
+            ["Display flex se kya hota?", "Elements line me ajaty hn"],
+            ["Background me color dalne ki property?", "background-color"],
+            ["Object ka color dalne k liye property?", "color"],
+            ["Button per cursor jaye to change hone ki property?", "hover"],
+            ["br tag kis liye use hota?", "line break k liye"],
+            ["HTML me style tag kisliye use hota?", "Inline CSS likhne k liye"],
+            ["CSS me class ki div ko target kese krty?", ".classname"],
+            ["Class dena q zruri?", "Style ya JS use k liye"],
+            ["Font change krne ki property?", "font-family"],
+            ["Website ki 3 layers?", "Frontend Backend Database"],
+            ["Website q zruri ha?", "Online presence k liye"],
+            ["Anchor tag kisliye hota?", "Link dene k liye"],
+            ["Button tag se kya hota?", "Clickable button bnta ha"],
+            ["href me kya dalty?", "Link ka URL"],
+            ["src me kya dalty?", "Image ya video ka path"],
+            ["./ se kya hota?", "Current folder ka path"],
+            ["Head me kya hum CSS link kr skty?", "Yes"],
+            ["Kya CSS k baghair HTML me styling ho skti?", "Limited"],
+            ["p tag se kya hota?", "Paragraph bnta ha"],
+            ["p tag ki full form?", "Paragraph"],
+            ["ul stand for?", "Unordered List"],
+            ["ol stand for?", "Ordered List"],
+            ["li stand for?", "List Item"],
+            ["Parent child hierarchy q zruri?", "Structure clear krne k liye"],
+            ["Digital marketing me kon se ads?", "Search Display Social"],
+            ["2+6 kya hota?", "8"],
+            ["8*5 kya hota?", "40"],
+            ["Kya coding mushkil ha?", "Nahi agar practice ho"],
+            ["Border radius q use hota?", "Corners gol krne k liye"],
+            ["Border lagane ki property?", "border"],
+            ["Border remove krne ki property?", "border: none"],
+            ["Website pe picture lgane k liye tag?", "img"],
+        ];
+
+        const quizContainer = document.getElementById("quiz-container");
+
+        const createQuiz = () => {
+            questions.forEach(([question, correctAnswer], index) => {
+                let options = [correctAnswer];
+                while (options.length < 5) {
+                    let option = allOptions[Math.floor(Math.random() * allOptions.length)];
+                    if (!options.includes(option)) {
+                        options.push(option);
+                    }
+                }
+                options.sort(() => Math.random() - 0.5); // shuffle
+
+                const selectHTML = options.map(opt => `<option value="${opt}">${opt}</option>`).join("");
+                quizContainer.innerHTML += `
+                <div class="question">
+                    <p>${index + 1}. ${question}</p>
+                    <select onchange="lockAnswer(this)">
+                        <option value="">Select your answer</option>
+                        ${selectHTML}
+                    </select>
+                    <div class="notification">Correct!</div>
+                </div>
+                `;
+            });
+        };
+
+        function lockAnswer(select) {
+            const questionIndex = [...document.querySelectorAll("select")].indexOf(select);
+            if (select.value === questions[questionIndex][1]) {
+                select.nextElementSibling.style.display = "block";
+            }
+            select.disabled = true;
+        }
+
+        function submitQuiz() {
+            const selects = document.querySelectorAll("select");
+            let score = 0;
+            selects.forEach((select, i) => {
+                if (select.value === questions[i][1]) {
+                    score++;
+                }
+            });
+            let percent = (score / questions.length) * 100;
+            if (percent >= 55) {
+                Swal.fire("🎉 Congratulations!", `You scored ${score}/${questions.length} (${Math.round(percent)}%) - You Passed!`, "success");
+            } else {
+                Swal.fire("😓 Oops!", `You scored ${score}/${questions.length} (${Math.round(percent)}%) - Try Again! Send Screenshot to your Teacher`, "error");
+            }
+        }
+
+        Swal.fire({
+            title: "Enter Roll Number",
+            input: "text",
+            inputLabel: "Roll Number",
+            inputPlaceholder: "Enter your roll number",
+            allowOutsideClick: false,
+            inputValidator: (value) => {
+                if (!value) {
+                    return "Roll number is required!";
+                } else if (value !== "23785") {
+                    return "Access Denied: Invalid Roll Number!";
+                }
+            }
+        }).then(result => {
+            if (result.value === "23785") {
+                document.getElementById("quiz-container").style.display = "block";
+                document.getElementById("submitBtn").style.display = "block";
+                document.getElementById("student-info").style.display = "block";
+                createQuiz();
+            }
+        });
+
+        // Set current date
+        const today = new Date();
+        document.getElementById("current-date").textContent = today.toLocaleDateString();
+    </script>
+</body>
+
+</html>
