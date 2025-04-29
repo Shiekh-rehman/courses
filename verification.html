@@ -58,10 +58,15 @@
       animation: fadeIn 1s ease-in-out;
     }
     .student-info img {
-      width: 100px;
-      border-radius: 50%;
+      width: 150px;
       margin-bottom: 15px;
       border: 3px solid #1976d2;
+    }
+    .student-info img:hover {
+      width: 150px;
+      margin-top: 15px;
+      border: 3px solid #1976d2;
+      transition: all .5s ease-in-out;
     }
     table {
       width: 100%;
@@ -90,7 +95,7 @@
     <button onclick="verifyStudent()">Verify</button>
 
     <div class="student-info" id="studentInfo">
-      <img src="./std img.jpeg" alt="Hamza Khan">
+      <img src="./studenthamza.jpg" class="Hamza" alt="Hamza Khan">
       <h3>Hamza Khan</h3>
       <table>
         <tr>
@@ -115,15 +120,15 @@
         </tr>
         <tr>
           <td>Attendance</td>
-          <td>0</td>
+          <td>1/1</td>
         </tr>
         <tr>
           <td>Academic Progress</td>
-          <td>0</td>
+          <td>100%</td>
         </tr>
         <tr>
           <td>Tasks Of the week</td>
-          <td> 0</td>
+          <td> 1/1</td>
         </tr>
        
        
