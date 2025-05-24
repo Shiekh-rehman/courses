@@ -3,326 +3,325 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digital Marketing Exam</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <title>Online Exam Page</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
     body {
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      color: #fff;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
       padding: 20px;
     }
-    .container {
-      max-width: 900px;
-      margin: auto;
-      background: #fff;
-      color: #333;
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    }
-    .hidden {
-      display: none;
-    }
-    input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 20px;
-      font-size: 18px;
-    }
-    .mcq, .written {
-      margin-bottom: 20px;
-    }
-    .options button {
-      margin: 5px;
-      padding: 10px;
-      border: none;
-      background-color: #3498db;
-      color: white;
-      cursor: pointer;
+    .form-container, .exam-container {
+      background: white;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
       border-radius: 8px;
-    }
-    .correct {
-      background-color: #2ecc71 !important;
-    }
-    .wrong {
-      background-color: #e74c3c !important;
-    }
-    .section-title {
-      font-size: 22px;
-      font-weight: bold;
-      margin-top: 30px;
-    }
-    .score-box {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #fff;
-      color: #000;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-weight: bold;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
+    .exam-container {
+      display: none;
+    }
     .student-info img {
-      width: 120px;
-      border-radius: 50%;
-      margin-bottom: 15px;
+      max-width: 150px;
+      border-radius: 8px;
     }
-    .submit-btn {
-      background: #27ae60;
-      color: white;
-      border: none;
-      padding: 15px;
-      font-size: 18px;
-      border-radius: 10px;
-      cursor: pointer;
+    .question {
       margin-top: 20px;
     }
-    .result-message {
-      font-size: 24px;
-      font-weight: bold;
-      margin-top: 20px;
-    }
-    .note {
-      background: #f1c40f;
+    textarea {
+      width: 100%;
+      height: 120px;
+      margin-top: 10px;
       padding: 10px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      color: #000;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      resize: vertical;
     }
   </style>
 </head>
 <body>
-  <div class="score-box">Score: <span id="score">0</span></div>
 
-  <div class="container">
-    <div id="rollInput">
-      <h2>Enter Roll Number to Start</h2>
-      <input type="text" id="rollNumber" placeholder="Enter Roll Number">
-      <button onclick="checkRoll()">Start</button>
+  <div class="form-container">
+    <h2>Enter Roll Number</h2>
+    <input type="text" id="rollInput" placeholder="Enter Roll Number">
+    <button onclick="startExam()">Start Exam</button>
+  </div>
+
+  <div class="exam-container" id="examPage">
+    <div class="student-info">
+      <img src="studenthamza.jpg" alt="Student Photo">
+      <p><strong>Roll Number:</strong> 23236</p>
+      <p><strong>Name:</strong> Hamza Khan</p>
+      <p><strong>Father Name:</strong> Shahid Mehmood</p>
+      <p><strong>Subject:</strong> Trading / Finance - E-commerce - Content Creation</p>
     </div>
 
-    <div id="examSection" class="hidden">
-      <div class="student-info">
-        <img src="studenthamza.jpg" alt="Student Photo">
-        <p><strong>Roll Number:</strong> 23236</p>
-        <p><strong>Name:</strong> Hamza Khan</p>
-        <p><strong>Father Name:</strong> Shahid Mehmood</p>
-        <p><strong>Subject:</strong> Trading / Finance - E-commerce - Content Creation</p>
+    <div class="questions">
+      <h3>Answer the following questions (4 marks each):</h3>
+
+      <div class="question">
+        <p>1. Explain the key differences between organic and paid digital marketing strategies with examples.</p>
+        <textarea></textarea>
       </div>
 
-      <div class="note">
-        <strong>Instructions:</strong> Har MCQ 2 marks ka hai. Ek bar answer select karne ke baad change nahi ho sakta. Written section ke questions 3 marks ke hain. Passing criteria 45% hai.
+      <div class="question">
+        <p>2. What is a sales funnel in digital marketing? Describe each stage with a real-world example.</p>
+        <textarea></textarea>
       </div>
 
-      <div class="section-title">Section A – MCQs</div>
-      <div id="mcqContainer"></div>
+      <div class="question">
+        <p>3. Describe the importance of content creation in building brand authority. What makes content effective?</p>
+        <textarea></textarea>
+      </div>
 
-      <div class="section-title">Section C – Written Questions</div>
-      <div id="writtenContainer"></div>
+      <div class="question">
+        <p>4. How does email marketing contribute to customer retention? Discuss tools and techniques used.</p>
+        <textarea></textarea>
+      </div>
 
-      <button class="submit-btn" onclick="submitExam()">Submit</button>
-      <div class="result-message" id="result"></div>
+      <div class="question">
+        <p>5. What is the role of SEO in digital marketing? Describe both on-page and off-page SEO techniques.</p>
+        <textarea></textarea>
+      </div>
+
+      <div class="question">
+        <p>6. What challenges do marketers face in performance-based digital advertising? How can they be solved?</p>
+        <textarea></textarea>
+      </div>
+
+      <div class="question">
+        <p>7. How does influencer marketing impact consumer behavior? Give two examples of successful campaigns.</p>
+        <textarea></textarea>
+      </div>
+
+      <div class="question">
+        <p>8. Explain affiliate marketing with examples. How do companies track performance?</p>
+        <textarea></textarea>
+      </div>
+
+      <div class="question">
+        <p>9. Discuss how A/B testing helps improve digital marketing campaigns. Provide an example scenario.</p>
+        <textarea></textarea>
+      </div>
+
+      <div class="question">
+        <p>10. What is ROAS (Return on Ad Spend)? How do businesses use it to optimize ad budgets?</p>
+        <textarea></textarea>
+      </div>
+
+      <div class="question">
+        <p>11. Explain customer persona and its importance in digital marketing strategy planning.</p>
+        <textarea></textarea>
+      </div>
+
+      <div class="question">
+        <p>12. What is retargeting in digital marketing? How does it improve conversion rates?</p>
+        <textarea></textarea>
+      </div>
     </div>
   </div>
 
- <script>
-  const correctAnswers = {
-    mcqs: [
-      "B", "A", "C", "B", "D", "A", "C", "D", "B", "A", "C", "B", "A", "C", "B",
-      "A", "D", "C", "B", "A", "C", "D", "A", "B", "C", "B", "A", "C", "D", "A", 
-      "B", "C", "A", "D", "B", "A", "C", "B", "D", "C", "A", "B", "D", "A"
-    ],
-    written: [
-      "audience", "product", "chatgpt", "support", "hammer", "engulfing", "harami", 
-      "structure", "tradingview", "website"
-    ]
-  };
 
-  const mcqQuestions = [
-    "1. Audience targeting ka basic matlab kya hota hai?",
-    "2. Kis type ke product zyada bikte hain?",
-    "3. ChatGPT ka use website development me kaise hota hai?",
-    "4. Support resistance ka kya role hota hai trading me?",
-    "5. Candlestick hammer kya indicate karta hai?",
-    "6. Digital marketing ke main goals kya hote hain?",
-    "7. Website speed optimization ka kya matlab hai?",
-    "8. Web development me HTML, CSS, aur JavaScript ka kya role hai?",
-    "9. SEO ka basic principle kya hai?",
-    "10. Content marketing ka basic objective kya hai?",
-    "11. Branding ka importance kya hota hai?",
-    "12. Mobile responsive design ka kya matlab hai?",
-    "13. UX aur UI design me kya difference hai?",
-    "14. Website me content aur structure ka balance kaise maintain karein?",
-    "15. Paid advertising ka kya role hota hai digital marketing me?",
-    "16. Social media marketing ke main tools kaunse hain?",
-    "17. ChatGPT ka use content creation me kaise hota hai?",
-    "18. E-commerce website me conversion rate kya hota hai?",
-    "19. Customer retention strategies kya hoti hain?",
-    "20. Affiliate marketing kya hai?",
-    "21. Email marketing campaigns ko effective kaise banayein?",
-    "22. Keyword research ka importance kya hai?",
-    "23. Content planning kaise karein digital marketing ke liye?",
-    "24. Video marketing ka role kya hota hai?",
-    "25. Branding aur reputation management kaise karein?",
-    "26. Quotex me short-term trading strategies kaise hoti hain?",
-    "27. Trading me support aur resistance levels kaise use karein?",
-    "28. Quotex me risk management ka kya importance hai?",
-    "29. Candlestick patterns ko kaise samjhein?",
-    "30. Trading view me charts kaise read karein?",
-    "31. Trading me leverage ka kya role hai?",
-    "32. Stop-loss aur take-profit orders kaise set karein?",
-    "33. Backtesting kaise hota hai trading strategies ka?",
-    "34. Trading psychology kaise improve karein?",
-    "35. Trend analysis ka basic method kya hai?",
-    "36. Volume analysis ka kya importance hai trading me?",
-    "37. Price action trading ka basic principle kya hai?",
-    "38. Scalping trading kaise hoti hai?",
-    "39. Day trading me timeframes ka selection kaise karein?",
-    "40. Risk-to-reward ratio kya hota hai?",
-    "41. ChatGPT ka trading analysis me use kaise ho sakta hai?",
-    "42. Trading ke liye perfect strategy kaise banayein?",
-    "43. Trading me demo account ka use kaise karein?",
-    "44. Trading alerts ko kaise set karein TradingView me?",
-    "45. Technical analysis aur fundamental analysis me kya farq hai?"
-  ];
 
-  const mcqOptions = [
-    ["A. Ad design", "B. Right person ko ad", "C. Color scheme", "D. None"],
-    ["A. Problem solving", "B. Mehange", "C. Free", "D. Trendy"],
-    ["A. Backend code", "B. Photos banata hai", "C. Content aur ideas deta hai", "D. Hosting karta hai"],
-    ["A. Time batata hai", "B. Price ka bounce point", "C. Loss ka point", "D. Profit batata hai"],
-    ["A. Bearish signal", "B. Neutral", "C. Reversal upward", "D. Confusion"],
-    ["A. Audience engagement", "B. Lead generation", "C. Awareness", "D. None"],
-    ["A. Speed up website load", "B. Add more content", "C. Increase ads", "D. None"],
-    ["A. Web pages ka structure", "B. Content ka placement", "C. User interaction", "D. All of the above"],
-    ["A. Backend setup", "B. Creating visual elements", "C. Designing interface", "D. None"],
-    ["A. Rank higher in search results", "B. Provide free content", "C. Increase ad revenue", "D. None"],
-    ["A. Sell directly", "B. Engage audience", "C. Keep users updated", "D. None"],
-    ["A. Build trust", "B. Sell more", "C. Increase web traffic", "D. None"],
-    ["A. User flow design", "B. Mobile optimization", "C. Cost-effective design", "D. None"],
-    ["A. User's experience", "B. User's information", "C. User's interface", "D. None"],
-    ["A. Clear structure", "B. Effective selling points", "C. User engagement", "D. All of the above"],
-    ["A. Generate clicks", "B. Drive traffic", "C. Increase conversion", "D. All of the above"],
-    ["A. User interaction", "B. Targeting audience", "C. Attracting followers", "D. None"],
-    ["A. Content-based ads", "B. Using AI for ideas", "C. Using visual aids", "D. None"],
-    ["A. Boosting conversion rates", "B. Increasing sales", "C. Improving customer experience", "D. None"],
-    ["A. Provide tools", "B. Manage your online store", "C. Lead generation", "D. All of the above"],
-    ["A. Sell products online", "B. Reach out to customers", "C. Both A and B", "D. None"],
-    ["A. Improve SEO", "B. Increase followers", "C. Drive traffic to website", "D. All of the above"],
-    ["A. Selling products", "B. Generating leads", "C. Content creation", "D. None"],
-    ["A. Social media marketing", "B. Keyword targeting", "C. Content marketing", "D. All of the above"],
-    ["A. Web hosting", "B. Coding", "C. Hosting design files", "D. None"],
-    ["A. Faster load time", "B. Higher ads revenue", "C. More products", "D. None"],
-    ["A. Increase traffic", "B. Improve brand trust", "C. Convert visitors to buyers", "D. All of the above"],
-    ["A. Support services", "B. Risk management", "C. Data analytics", "D. None"],
-    ["A. Strong market presence", "B. Effective customer service", "C. Target audience engagement", "D. None"],
-    ["A. No risk", "B. Steady profits", "C. Lower earnings", "D. None"],
-    ["A. Easy predictions", "B. Testing a strategy", "C. Both A and B", "D. None"],
-    ["A. Practice strategies", "B. Improve trading skills", "C. Decrease risk", "D. All of the above"],
-    ["A. Financial stability", "B. More trading options", "C. Timely trade management", "D. None"],
-    ["A. Chart analysis", "B. Price movement", "C. Market data", "D. All of the above"]
-  ];
 
-  const writtenQuestions = [
-    "1. Audience kya hoti hai marketing me?",
-    "2. Product types ke examples do.",
-    "3. ChatGPT se website banane me kya madad milti hai?",
-    "4. Trading me support resistance kya hota hai?",
-    "5. Hammer candlestick kya hota hai?",
-    "6. Engulfing pattern kya hota hai?",
-    "7. Harami pattern kitne types ka hota hai?",
-    "8. Structure ka kya matlab hai market me?",
-    "9. TradingView kya tool hai?",
-    "10. Website ka kya role hota hai ecommerce me?"
-  ];
 
-  let score = 0;
 
-  function checkRoll() {
-    const roll = document.getElementById("rollNumber").value;
-    if (roll === "23236") {
-      document.getElementById("rollInput").style.display = 'none';
-      document.getElementById("examSection").classList.remove("hidden");
-      loadMcqs();
-      loadWritten();
-    } else {
-      alert("Invalid Roll Number");
-    }
-  }
 
-  function loadMcqs() {
-    const container = document.getElementById("mcqContainer");
-    mcqQuestions.forEach((q, index) => {
-      const div = document.createElement("div");
-      div.classList.add("mcq");
-      div.innerHTML = `<p>${q}</p>`;
-      const opts = document.createElement("div");
-      opts.classList.add("options");
-      mcqOptions[index].forEach((opt, i) => {
-        const btn = document.createElement("button");
-        btn.textContent = opt;
-        btn.onclick = function () {
-          if (btn.classList.contains("correct") || btn.classList.contains("wrong")) return;
-          const ans = opt.charAt(0);
-          if (ans === correctAnswers.mcqs[index]) {
-            btn.classList.add("correct");
-            score += 2;
-          } else {
-            btn.classList.add("wrong");
-          }
-          document.getElementById("score").innerText = score;
-        }
-        opts.appendChild(btn);
-      });
-      div.appendChild(opts);
-      container.appendChild(div);
-    });
-  }
 
-  function loadWritten() {
-    const container = document.getElementById("writtenContainer");
-    writtenQuestions.forEach((q, index) => {
-      const div = document.createElement("div");
-      div.classList.add("written");
-      div.innerHTML = `<p>${q}</p><input type='text' id='written${index}' placeholder='Write answer here'> <span id='result${index}'></span>`;
-      container.appendChild(div);
-    });
-  }
 
-  function submitExam() {
-    for (let i = 0; i < writtenQuestions.length; i++) {
-      const userAns = document.getElementById(`written${i}`).value.toLowerCase().trim();
-      const resultSpan = document.getElementById(`result${i}`);
-      if (userAns.includes(correctAnswers.written[i])) {
-        score += 3;
-        resultSpan.innerText = "Correct";
-        resultSpan.style.color = "green";
+      <!-- MCQ Questions Start -->
+      <div class="mcq-question">
+        <p>1. What does SEO stand for?</p>
+        <label><input type="checkbox"> Search Engine Optimization</label>
+        <label><input type="checkbox"> Social Engagement Option</label>
+        <label><input type="checkbox"> Speed Engine Optimization</label>
+        <label><input type="checkbox"> Site Element Order</label>
+      </div>
+
+      <div class="mcq-question">
+        <p>2. What platform is commonly used for pay-per-click advertising?</p>
+        <label><input type="checkbox"> Google Ads</label>
+        <label><input type="checkbox"> Facebook Pages</label>
+        <label><input type="checkbox"> LinkedIn Profile</label>
+        <label><input type="checkbox"> Google Docs</label>
+      </div>
+
+      <div class="mcq-question">
+        <p>3. What is a bounce rate?</p>
+        <label><input type="checkbox"> The rate at which users leave a site after viewing one page</label>
+        <label><input type="checkbox"> The speed of website loading</label>
+        <label><input type="checkbox"> Number of email bounces</label>
+        <label><input type="checkbox"> How often users revisit a site</label>
+      </div>
+
+      <div class="mcq-question">
+        <p>4. Which of the following is an email marketing tool?</p>
+        <label><input type="checkbox"> Mailchimp</label>
+        <label><input type="checkbox"> Canva</label>
+        <label><input type="checkbox"> Photoshop</label>
+        <label><input type="checkbox"> Google Sheets</label>
+      </div>
+
+      <div class="mcq-question">
+        <p>5. What is affiliate marketing?</p>
+        <label><input type="checkbox"> Promoting other products and earning commission</label>
+        <label><input type="checkbox"> Creating your own blog</label>
+        <label><input type="checkbox"> Sending emails</label>
+        <label><input type="checkbox"> Managing inventory</label>
+      </div>
+
+      <div class="mcq-question">
+        <p>6. Which metric tells how many users clicked your ad?</p>
+        <label><input type="checkbox"> Click-Through Rate (CTR)</label>
+        <label><input type="checkbox"> Bounce Rate</label>
+        <label><input type="checkbox"> Exit Rate</label>
+        <label><input type="checkbox"> Conversion Value</label>
+      </div>
+
+      <div class="mcq-question">
+        <p>7. What is content marketing?</p>
+        <label><input type="checkbox"> Creating valuable content to attract audience</label>
+        <label><input type="checkbox"> Posting random memes</label>
+        <label><input type="checkbox"> Sending spam emails</label>
+        <label><input type="checkbox"> Running paid ads only</label>
+      </div>
+
+      <div class="mcq-question">
+        <p>8. What does CPC stand for?</p>
+        <label><input type="checkbox"> Cost Per Click</label>
+        <label><input type="checkbox"> Clicks Per Campaign</label>
+        <label><input type="checkbox"> Client Paid Campaign</label>
+        <label><input type="checkbox"> Custom Page Code</label>
+      </div>
+
+      <div class="mcq-question">
+        <p>9. Which platform is best for professional B2B marketing?</p>
+        <label><input type="checkbox"> LinkedIn</label>
+        <label><input type="checkbox"> Instagram</label>
+        <label><input type="checkbox"> TikTok</label>
+        <label><input type="checkbox"> Snapchat</label>
+      </div>
+
+      <div class="mcq-question">
+        <p>10. What is the purpose of Google Analytics?</p>
+        <label><input type="checkbox"> Track website traffic and behavior</label>
+        <label><input type="checkbox"> Send emails</label>
+        <label><input type="checkbox"> Edit videos</label>
+        <label><input type="checkbox"> Schedule meetings</label>
+      </div>
+
+      <!-- Add more 10 MCQs similarly -->
+      <!-- MCQs 11 to 20 here -->
+      <div class="mcq-question">
+        <p>11. What is the full form of ROI?</p>
+        <label><input type="checkbox"> Return on Investment</label>
+        <label><input type="checkbox"> Rate of Internet</label>
+        <label><input type="checkbox"> Revenue on Input</label>
+        <label><input type="checkbox"> Reach on Instagram</label>
+      </div>
+
+      <div class="mcq-question">
+        <p>12. What’s a major benefit of remarketing?</p>
+        <label><input type="checkbox"> Increased conversions</label>
+        <label><input type="checkbox"> Lower hosting cost</label>
+        <label><input type="checkbox"> Free website</label>
+        <label><input type="checkbox"> Easy logo creation</label>
+      </div>
+
+      <div class="mcq-question">
+        <p>13. What does CTA stand for?</p>
+        <label><input type="checkbox"> Call to Action</label>
+        <label><input type="checkbox"> Click to Advance</label>
+        <label><input type="checkbox"> Campaign Test Ad</label>
+        <label><input type="checkbox"> Cost Tracking Analysis</label>
+      </div>
+
+      <div class="mcq-question">
+        <p>14. Which is NOT a social media platform?</p>
+        <label><input type="checkbox"> WordPress</label>
+        <label><input type="checkbox"> Facebook</label>
+        <label><input type="checkbox"> Twitter</label>
+        <label><input type="checkbox"> Instagram</label>
+      </div>
+
+      <div class="mcq-question">
+        <p>15. Which tool is used for keyword research?</p>
+        <label><input type="checkbox"> Ubersuggest</label>
+        <label><input type="checkbox"> WhatsApp</label>
+        <label><input type="checkbox"> Zoom</label>
+        <label><input type="checkbox"> Excel</label>
+      </div>
+
+      <div class="mcq-question">
+        <p>16. What type of ad is shown based on previous browsing history?</p>
+        <label><input type="checkbox"> Retargeting Ads</label>
+        <label><input type="checkbox"> Static Ads</label>
+        <label><input type="checkbox"> Cold Ads</label>
+        <label><input type="checkbox"> Email Ads</label>
+      </div>
+
+      <div class="mcq-question">
+        <p>17. What is an example of a video marketing platform?</p>
+        <label><input type="checkbox"> YouTube</label>
+        <label><input type="checkbox"> Google Docs</label>
+        <label><input type="checkbox"> Dropbox</label>
+        <label><input type="checkbox"> Twitter</label>
+      </div>
+
+      <div class="mcq-question">
+        <p>18. What is the goal of lead generation?</p>
+        <label><input type="checkbox"> Collect potential customer contacts</label>
+        <label><input type="checkbox"> Make videos</label>
+        <label><input type="checkbox"> Post memes</label>
+        <label><input type="checkbox"> Get likes</label>
+      </div>
+
+      <div class="mcq-question">
+        <p>19. What is the ideal keyword density in SEO?</p>
+        <label><input type="checkbox"> 1% to 2%</label>
+        <label><input type="checkbox"> 5% to 10%</label>
+        <label><input type="checkbox"> 15%</label>
+        <label><input type="checkbox"> No limit</label>
+      </div>
+
+      <div class="mcq-question">
+        <p>20. Which is a paid marketing channel?</p>
+        <label><input type="checkbox"> Google Ads</label>
+        <label><input type="checkbox"> Blog Articles</label>
+        <label><input type="checkbox"> Instagram Stories (Organic)</label>
+        <label><input type="checkbox"> LinkedIn Posts (Organic)</label>
+      </div>
+      <!-- MCQ Questions End -->
+    <button onclick="alert('Exam Submitted!')">Submit Exam</button>
+  </div>
+
+
+
+
+
+
+  <script>
+    function startExam() {
+      const roll = document.getElementById('rollInput').value;
+      if (roll === '23236') {
+        document.querySelector('.form-container').style.display = 'none';
+        document.getElementById('examPage').style.display = 'block';
       } else {
-        resultSpan.innerText = "Wrong";
-        resultSpan.style.color = "red";
+        alert('Invalid Roll Number');
       }
-      document.getElementById("score").innerText = score;
     }
 
-    const total = (mcqQuestions.length * 2) + (writtenQuestions.length * 3);
-    const percentage = (score / total) * 100;
-    const resultBox = document.getElementById("result");
-    if (percentage >= 45) {
-      resultBox.innerText = `🎉 Passed! Score: ${score} (${percentage.toFixed(2)}%)`;
-      resultBox.style.color = "green";
-    } else {
-      resultBox.innerText = `❌ Failed! Score: ${score} (${percentage.toFixed(2)}%)`;
-      resultBox.style.color = "red";
+    // Function to handle the submission of the exam
+       function startExam() {
+      const roll = document.getElementById('rollInput').value;
+      if (roll === '23236') {
+        document.querySelector('.form-container').style.display = 'none';
+        document.getElementById('examPage').style.display = 'block';
+      } else {
+        alert('Invalid Roll Number');
+      }
     }
-  }
-</script>
+  </script>
 
 </body>
 </html>
