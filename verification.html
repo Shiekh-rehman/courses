@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Student Verification - Virtual University</title>
   <style>
+    /* same styles as before... (keep as-is) */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #0d47a1, #1976d2);
@@ -53,7 +54,6 @@
       background-color: #0d47a1;
     }
     .student-info {
-      display: none;
       margin-top: 30px;
       animation: fadeIn 1s ease-in-out;
     }
@@ -61,12 +61,6 @@
       width: 150px;
       margin-bottom: 15px;
       border: 3px solid #1976d2;
-    }
-    .student-info img:hover {
-      width: 150px;
-      margin-top: 15px;
-      border: 3px solid #1976d2;
-      transition: all .5s ease-in-out;
     }
     table {
       width: 100%;
@@ -90,69 +84,89 @@
 <body>
   <div class="container">
     <h2 style="color:#1976d2">🎓 Student Verification</h2>
-    <input type="text" id="rollInput" placeholder="Enter Roll Number (e.g. xxxxx)">
+    <input type="text" id="rollInput" placeholder="Enter Roll Number (e.g. 7778)">
     <br>
     <button onclick="verifyStudent()">Verify</button>
 
-    <div class="student-info" id="studentInfo">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASkAAACpCAMAAABAgDvcAAAAflBMVEX29vYyMjL8/PwlJSWZmZn5+fkvLy8rKysoKCgjIyPv7+/r6+v19fWoqKg6Ojrb29s/Pz9RUVFHR0fi4uLU1NTFxcV+fn6Ojo5tbW11dXW7u7tLS0vBwcFkZGTKysqzs7NbW1uFhYWgoKAaGhp5eXmUlJStra1eXl4SEhIRERGhK/n7AAAH8UlEQVR4nO1d65aivBKVxErCRUFFURG1vX7n/V/wQKMSFCJIZhyS7B89axyGJburikqlamcwMDAwMDAwMDAwMDAwMDAwMOgpAAABpH/+/jSoASBvNt9Fq9VyuRquQwcZsqqQ0hQOk/HRZjQDtll89geGq2cA+MOYYUqsAgTTZG6csATw5ifGeJZuoHgxQ9/+dv8OYLBdkiqeMrBgY6zqBnBPhFbT9OuDZAee5wHSPr6jTcDqecqoopM4jieLc+hpTRaMrBq/480qRRrug8jXNsDDIHpPVMEYG0faBviD3ZyojCscb7W0KjQirYhKQYOLhlaF5q2JSs3qeNHOqsDdC7KDeqqCuW5UQYQ/ICp1wKmvF1UQ1uXl78BW3/7ufxfeUpxxiqxqrVNUh/knQSoHmTrf/vp/EbD6nCnLXusTqWDbgSiLJt63H+CvAX344rtTpU+q7sQfvvhysIUuTHVzvjSm73WJ6ejn4xQhB9UlUfemnZwvdb+zHikVhJ3ieWZTybef4e8A1nZHpojlauF+6NDVpiwSasGUt+8YptJAtdMhUIEbdGdqoQVT265hKg3pSy2YmncOUxYJdFj6oZEEpsY6ZOmdM3RLlzQBLbozZR11KCd0quLdYeuw8vMSGUzp0C4kIfHUpEJsmGoKZ2KYaga3RStQPVM7HZgaG6aaQQ5TWnifYaohDFNNIYcpHTJPOUzpsJqRwpQWK2QpTJGZ+kyBDKb0qOQZpppCClNa1NFlrPtIrMHeDPgyAvpeB6ZCCSVPqsPOKMwlbDjQk2HKMPUAunTfGNWEqcjYVDPI2ELWg6nBVUKWQBMNmHKkLJCnGiyQZzK2ZnRY90EogaiUKffbD/LHgc4SAroWNU8ko9MlZUr9yW0pAd2y2I/qTMFWQoZuZQUq1Zvy0FAOU+oHKrfrcNEdLFI79+w+MnMHidXenZHS45kDH1Q2qq7DojxIrHJM95bymLKowpEK7SQSlfqfsmIc4HcfwuJBVBXDQe5Vqkml/jdRUQ4OUNhNJKEKbBoqRxW4o0CyRWWg05Gnlgd6hwBLt6gMhC3n3344qQB/L2m99wwWKza8Dc6K/gGjIseToxZRmczpZSql2snzhOOdiiLq4C/op+J4lTxRS1XRWIDtyZIU2AllwXCmrmhzJq4/PeIPJE/LLGF7vForftIDIGd72I9tRj+hi6SmlLJ0PWxcHXSts0NA1sNVMiaMYcwYa5CRMhtn142vy9NhM/P0OWUFUniuP59fhtHPYhG8taXzaL2ZhzP3V31fF5YKZAfxZPDeDpHiNHZn+PY3/jbe6wtiRcsrbWGYaor3I9yGqRyGqaYwTDWFYaopDFNNYd59YoB3b9V8a1NkfOtBcBUrmjcCcqJ7Cwa861C/KzKDHzlqFqTqgbz1NLrbB6zf1Njx8MYPiuK1TmYFyNntqf3YKXjbeP2QrobQpvuL4oWpOwANwvMEU3rlPhSPPZDg0VLtXSnBk3M4UJ0sQJ4/2pOsQsw4uZE3nddc9yvsWLbRQPYjhYtUAOCG0YTmhfTSUSipUwmZ4lo6nbz7keDxJApdBQsxgMC/LALrsTeDf0ovMVGeUNLufExyEcKsYHHx1SILwD8sCea2sEhQ2vkVSnzSJXdpqauPMEyWO2WOikzfdJsVweViOU1KTyfME/CIvxaeNC5Tbz5tVHgbApodJvbLRjsu65vDTNCDVpZwQbtnUgm1J4e+b/0BhFFQ0Y9Aps/drPVqqE8C31DV0U5oEIU93nev3zPGw6enEuhbP3dTQ+WUBMHWIuxrwAJnWHd49ssxDPXq8mT8dC2E1Xuq6btw2M++F5gldUfT0uWLfk1t5YVMnq+tbdUmdtLHuQfwJ7Whh7yK3NVOvD9Wx8WdN7XRn076V8gCN6lNkcj4VRIJNjWBirzKvHn1I4Js2bvBB7Soz5CqxqjqlM5I/DqaLdKmwH2TxoG5oKes+lid6ujDotdrhUPfrGdzf6IBGXaqepaag40qnE880VXxtviXIZy5YpXyruBXpklB1bQ/rEXLxF7pV8Kp/lHqJoihKk+oPv1ReApSlb/+u3AF+1LlBW+ByjiNq8W94SD4TcQ9Ep0QSuGxon5eWn1UHW1ELD6VLK6HUOB+pEc51et6vwBdDvIes4E725Z4mL0ufekK8RdsZ+4A5XwJ3hi4R+ewic5zsjfIc/zt4SeZBscrv1B7rjxZ5dUxONdjME1+Dlvf9ZBg8tseqcEUXSTBmGD82zxs8zUFtHtxKcZlXnC2895hTMZBshDYlCJMWZTvr6Zbzmhe5CvJnrvnvKhzpYQJspB+MdVUFYHuuZThpTOWFc4H7r7peKCaTFmYy35e8gRcOB80P7+8X3GqudIGt06DzbH0T9zqGLUQAe0XU83HHvmS+lPqjc+P/KmNHIyqTFmYW7CcSrGokAMCQQ1HH6a4TBFGvI8VG/KiTFYnpsjk0XLm8zb1aNwAv5V+gKLvvgz0dP+PwB9Y96jOeKtWY7kKM1X4H+JyATK+hfq2ks798r52TBHrtvyHTWE992O0wW8pldovplqKI9BVXtKFWbHvcHcir624V7+Yaqvxhi/506EiJNHcztqfM602U/c99cL9bn1DELbW/7QvfWLqP9wSx7zlHHxs3z7ILcPZH9ve6n89sinYnodtcc63VLzR/YPfJKvDnfqBfL64HW6P9/T3DncyMDAwMDAwMDAwMDAwMDD4A/g/oaZ401QcK1EAAAAASUVORK5CYII=" class="Hamza" alt="Hamza Khan">
-     
+    <div class="student-info" id="studentInfo" style="display:none;">
+      <img id="studentImg" src="" alt="Student Image">
       <h3>Student Verification</h3>
-      <table>
-        <tr>
-          <th>Field</th>
-          <th>Details</th>
-        </tr>
-        <tr>
-          <td>Roll Number</td>
-          <td>7778</td>
-        </tr>
-        <tr>
-          <td>Name</td>
-          <td>Ayat Shezad</td>
-        </tr>
-        <tr>
-          <td>Father Name</td>
-          <td>----</td>
-        </tr>
-        <tr>
-          <td>Subject</td>
-          <td>Web Development</td>
-        </tr>
-        <tr>
-          <td>Attendance</td>
-          <td>3/3</td>
-        </tr>
-        <tr>
-          <td>Academic Progress</td>
-          <td>100%</td>
-        </tr>
-        <tr>
-          <td>Tasks Of the week</td>
-          <td> 2/2</td>
-        </tr>
-        <tr>
-          <td>Result Exam 1</td>
-          <td>Pending</td>
-        </tr>
-        <tr>
-          <td>Result Exam 2</td>
-          <td>Pending</td>
-       
-       
+      <table id="studentTable">
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody id="studentData"></tbody>
       </table>
     </div>
   </div>
 
   <script>
+    // ✅ Student Data List
+    const students = {
+      "7778": {
+        name: "Ayat Shezad",
+        father: "----",
+        subject: "Web Development",
+        attendance: "3/3",
+        progress: "100%",
+        task: "2/2",
+        exam1: "Pending",
+        exam2: "Pending",
+        image: "https://via.placeholder.com/150" // You can replace with real images
+      },
+      "9890": {
+        name: "Muhammad Awais",
+        father: "Raza Hussain",
+        subject: "Web Development",
+        attendance: "0/0",
+        progress: "-----",
+        task: "0/2",
+        exam1: "---",
+        exam2: "Pending",
+        image: "https://via.placeholder.com/150/007bff/ffffff"
+      },
+      "9891": {
+        name: "Musa Bin Naseer",
+        father: "------",
+        subject: "Web Development",
+        attendance: "0/0",
+        progress: "-----",
+        task: "0/2",
+        exam1: "---",
+        exam2: "Pending",
+        image: "https://via.placeholder.com/150/007bff/ffffff"
+      },
+    };
+
     function verifyStudent() {
-      const input = document.getElementById('rollInput').value;
-      const info = document.getElementById('studentInfo');
-      if (input === "7778") {
-        info.style.display = 'block';
+      const roll = document.getElementById("rollInput").value.trim();
+      const infoDiv = document.getElementById("studentInfo");
+      const dataBody = document.getElementById("studentData");
+      const studentImg = document.getElementById("studentImg");
+
+      if (students[roll]) {
+        const s = students[roll];
+        infoDiv.style.display = 'block';
+        studentImg.src = s.image;
+
+        // ✅ Fill table
+        dataBody.innerHTML = `
+          <tr><td>Roll Number</td><td>${roll}</td></tr>
+          <tr><td>Name</td><td>${s.name}</td></tr>
+          <tr><td>Father Name</td><td>${s.father}</td></tr>
+          <tr><td>Subject</td><td>${s.subject}</td></tr>
+          <tr><td>Attendance</td><td>${s.attendance}</td></tr>
+          <tr><td>Academic Progress</td><td>${s.progress}</td></tr>
+          <tr><td>Tasks Of the week</td><td>${s.task}</td></tr>
+          <tr><td>Result Exam 1</td><td>${s.exam1}</td></tr>
+          <tr><td>Result Exam 2</td><td>${s.exam2}</td></tr>
+        `;
       } else {
         alert("Student not found or maybe Suspended. Please check the Roll Number.");
-        info.style.display = 'none';
+        infoDiv.style.display = 'none';
       }
     }
   </script>
