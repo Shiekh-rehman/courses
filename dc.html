@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AR Softech — Documents & Courses</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!-- Swiper (Carousel) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: rgba(255, 255, 255, 0.08);
+      --glass: rgba(255, 255, 255, 0.06);
+      --primary: #7c5cff; /* luxury violet */
+      --accent: #19d3da;  /* cyan */
+      --text: #e8e8ea;
+      --muted: #9aa0b4;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius-xl: 22px;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(124,92,255,.25), transparent 60%),
+                  radial-gradient(900px 500px at -10% 110%, rgba(25,211,218,.18), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* --- Navbar --- */
+    .nav {
+      position: fixed; inset: 0 0 auto 0; height: 72px; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      background: linear-gradient(to right, rgba(11,16,32,.55), rgba(11,16,32,.25));
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .brand { display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.4px; }
+    .brand i { font-size: 28px; color: var(--accent); }
+    .brand span { font-size: 18px; }
+    .nav a.btn { text-decoration:none; color: #0b1020; background: linear-gradient(135deg, var(--accent), var(--primary));
+      padding: 10px 16px; border-radius: 999px; font-weight: 700; box-shadow: var(--shadow);
+    }
+
+    /* --- Hero --- */
+    .hero {
+      position: relative; padding: 140px 24px 80px; min-height: 92vh; display:grid; place-items:center;
+      overflow: clip;
+    }
+    .hero-wrap { max-width: 1200px; width:100%; display:grid; grid-template-columns: 1.1fr .9fr; gap: 32px; align-items: center; }
+    @media (max-width: 980px){ .hero-wrap{ grid-template-columns: 1fr; padding-top: 40px; } }
+
+    .hero h1 { font-size: clamp(32px, 5vw, 60px); line-height: 1.05; margin: 0 0 16px; }
+    .hero p { color: var(--muted); font-size: clamp(15px, 2.2vw, 18px); margin: 0 0 28px; }
+
+    .cta-row { display:flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary { background: linear-gradient(135deg, var(--primary), #a78bfa); color: #0b1020; font-weight: 800; padding: 14px 20px; border:none; border-radius: 14px; cursor:pointer; box-shadow: 0 10px 30px rgba(124,92,255,.4); }
+    .btn-ghost { background: transparent; color: var(--text); border: 1px solid rgba(255,255,255,.14); padding: 14px 18px; border-radius: 14px; cursor:pointer; }
+
+    .hero-media {
+      position: relative; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.1);
+    }
+    .hero-media img { width:100%; height:100%; object-fit: cover; display:block; }
+    .hero-badge { position:absolute; bottom:16px; left:16px; background: rgba(11,16,32,.7); border:1px solid rgba(255,255,255,.12); padding:10px 14px; border-radius: 12px; display:flex; align-items:center; gap:8px; }
+    .hero-badge i { color: var(--accent); }
+
+    /* --- Section utility --- */
+    .section { padding: 96px 24px; position: relative; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section h2 { font-size: clamp(26px, 3.6vw, 42px); margin: 0 0 14px; }
+    .section .lead { color: var(--muted); margin-bottom: 28px; }
+
+    /* --- Carousel / Featured Docs --- */
+    .feature-card { border-radius: var(--radius-xl); overflow: hidden; background: var(--glass); border: 1px solid rgba(255,255,255,.08); box-shadow: var(--shadow); }
+    .feature-card img { width:100%; height: 340px; object-fit: cover; display:block; }
+    .feature-meta { display:flex; align-items:center; justify-content:space-between; padding: 16px 18px; }
+    .pill { display:inline-flex; align-items:center; gap:8px; background: rgba(124,92,255,.15); color:#eae4ff; border:1px solid rgba(124,92,255,.35); padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 700; }
+
+    /* --- Products Grid --- */
+    .grid { display:grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+    .product { grid-column: span 4; min-height: 340px; position: relative; border-radius: var(--radius-xl); overflow:hidden; background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.08); box-shadow: var(--shadow); }
+    @media (max-width: 1024px){ .product{ grid-column: span 6; } }
+    @media (max-width: 680px){ .product{ grid-column: span 12; } }
+
+    .product img { position:absolute; inset:0; width:100%; height:100%; object-fit: cover; filter: saturate(1.05) contrast(1.02); transition: transform .6s ease; }
+    .product:hover img { transform: scale(1.06); }
+
+    .product .mask { position:absolute; inset:auto 0 0 0; min-height: 44%; background: linear-gradient(180deg, transparent, rgba(11,16,32,.85)); }
+
+    .product .bar { position:absolute; inset:auto 14px 14px 14px; background: rgba(11,16,32,.7); border:1px solid rgba(255,255,255,.12); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: var(--radius-lg); padding: 14px; transition: transform .35s ease, opacity .35s ease; transform: translateY(8px); opacity: .92; }
+    .product:hover .bar { transform: translateY(0); opacity: 1; }
+
+    .bar .title { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom: 8px; font-weight: 700; }
+    .bar .desc { color: #cfd3e1; font-size: 14px; line-height: 1.5; max-height: 0; overflow: hidden; transition: max-height .45s ease; }
+    .product:hover .bar .desc { max-height: 140px; }
+
+    .bar .row { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top: 12px; }
+    .price { font-weight: 800; background: linear-gradient(135deg, #fff, #b7faff); -webkit-background-clip:text; background-clip:text; color: transparent; }
+    .btn-buy { background: linear-gradient(135deg, var(--accent), #7cffe7); border:none; color:#041018; font-weight: 800; padding: 10px 14px; border-radius: 12px; cursor:pointer; }
+
+    /* --- Testimonials --- */
+    .testimonial { background: var(--glass); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius-xl); padding: 20px; box-shadow: var(--shadow); }
+    .t-head { display:flex; align-items:center; gap:12px; margin-bottom: 10px; }
+    .avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+    .stars { color: #ffd166; letter-spacing: 2px; font-size: 18px; }
+    .t-quote { color: #d9dbe6; font-style: italic; line-height: 1.6; }
+
+    /* --- Footer --- */
+    .footer { padding: 36px 24px 80px; text-align:center; color: var(--muted); border-top: 1px solid rgba(255,255,255,.08); }
+
+    /* Subtle floating shapes */
+    .orb { position:absolute; border-radius: 999px; filter: blur(40px); opacity: .4; }
+    .orb.one { width: 360px; height: 360px; background: #7c5cff; top: -120px; left: -120px; }
+    .orb.two { width: 300px; height: 300px; background: #19d3da; bottom: -100px; right: -120px; }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="nav">
+    <div class="brand">
+      <i class="ri-stack-line"></i>
+      <span>AR Softech</span>
+    </div>
+    <a class="btn" href="#products">Browse Documents</a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+
+    <div class="hero-wrap container">
+      <div>
+        <h1>
+          Premium <span style="background:linear-gradient(135deg,#fff,#b7faff);-webkit-background-clip:text;background-clip:text;color:transparent;">Documents & Courses</span><br/>
+          for Websites & Apps
+        </h1>
+        <p>High‑impact proposals, plans, and technical templates to win clients faster. Built by AR Softech for creators, founders, and agencies.</p>
+        <div class="cta-row">
+          <a href="#featured" class="btn-primary">See Featured</a>
+          <a href="#products" class="btn-ghost">Explore All</a>
+        </div>
+      </div>
+      <div class="hero-media" aria-label="Hero preview">
+        <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1600&auto=format&fit=crop" alt="Laptop with code and documents"/>
+        <div class="hero-badge"><i class="ri-flashlight-fill"></i> Trusted By 100+ Teams</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- FEATURED CAROUSEL -->
+  <section class="section" id="featured">
+    <div class="container">
+      <h2>Featured Documents</h2>
+      <p class="lead">Handpicked resources with clean structure, persuasive copy, and client‑ready formatting.</p>
+
+      <div class="swiper feature-swiper">
+        <div class="swiper-wrapper">
+          <!-- Slide 1 -->
+          <div class="swiper-slide">
+            <article class="feature-card">
+              <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1600&auto=format&fit=crop" alt="Proposal layout"/>
+              <div class="feature-meta">
+                <span class="pill"><i class="ri-file-text-line"></i> Website Proposal</span>
+                <button class="btn-buy" onclick="alert('Add to cart: Website Proposal Template')">Buy — PKR 2,499</button>
+              </div>
+            </article>
+          </div>
+          <!-- Slide 2 -->
+          <div class="swiper-slide">
+            <article class="feature-card">
+              <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1600&auto=format&fit=crop" alt="App planning"/>
+              <div class="feature-meta">
+                <span class="pill"><i class="ri-smartphone-line"></i> App Proposal</span>
+                <button class="btn-buy" onclick="alert('Add to cart: App Proposal Template')">Buy — PKR 3,499</button>
+              </div>
+            </article>
+          </div>
+          <!-- Slide 3 -->
+          <div class="swiper-slide">
+            <article class="feature-card">
+              <img src="https://images.unsplash.com/photo-1557800636-894a64c1696f?q=80&w=1600&auto=format&fit=crop" alt="Business plan"/>
+              <div class="feature-meta">
+                <span class="pill"><i class="ri-briefcase-3-line"></i> Business Plan</span>
+                <button class="btn-buy" onclick="alert('Add to cart: Business Plan Document')">Buy — PKR 4,999</button>
+              </div>
+            </article>
+          </div>
+        </div>
+        <!-- Controls -->
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS GRID / SELLING SECTION -->
+  <section class="section" id="products">
+    <div class="container">
+      <h2>Documents Catalog</h2>
+      <p class="lead">Hover over a card to preview the description. Click buy to secure instant access.</p>
+
+      <div class="grid">
+        <!-- Product 1 -->
+        <article class="product">
+          <img src="https://images.unsplash.com/photo-1516387938699-a93567ec168e?q=80&w=1600&auto=format&fit=crop" alt="Website Proposal Template" />
+          <div class="mask"></div>
+          <div class="bar">
+            <div class="title"><span>Website Proposal Template</span><span class="price">PKR 2,499</span></div>
+            <div class="desc">Close more website clients with a structured, persuasive, and beautifully formatted proposal. Includes timeline, scope, FAQs, and upsell slots.</div>
+            <div class="row">
+              <small class="muted">.docx • Google Docs</small>
+              <button class="btn-buy" onclick="alert('Purchased: Website Proposal Template')">Buy Now</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 2 -->
+        <article class="product">
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1600&auto=format&fit=crop" alt="App Proposal Template" />
+          <div class="mask"></div>
+          <div class="bar">
+            <div class="title"><span>Mobile App Proposal Template</span><span class="price">PKR 3,499</span></div>
+            <div class="desc">Pitch apps with clarity: feature set, milestones, payment schedule, and maintenance upsell. Crafted for React Native / Flutter shops.</div>
+            <div class="row">
+              <small class="muted">.docx • Google Docs</small>
+              <button class="btn-buy" onclick="alert('Purchased: App Proposal')">Buy Now</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 3 -->
+        <article class="product">
+          <img src="https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=1600&auto=format&fit=crop" alt="Business Plan" />
+          <div class="mask"></div>
+          <div class="bar">
+            <div class="title"><span>Business Plan (Agency)</span><span class="price">PKR 4,999</span></div>
+            <div class="desc">Investor‑ready plan tailored for service agencies: market, offers, GTM, ops, and 12‑month projections sheet.</div>
+            <div class="row">
+              <small class="muted">.pdf • .docx</small>
+              <button class="btn-buy" onclick="alert('Purchased: Business Plan')">Buy Now</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 4 -->
+        <article class="product">
+          <img src="https://images.unsplash.com/photo-1552581234-26160f608093?q=80&w=1600&auto=format&fit=crop" alt="SOW Template" />
+          <div class="mask"></div>
+          <div class="bar">
+            <div class="title"><span>Scope of Work (SOW)</span><span class="price">PKR 1,999</span></div>
+            <div class="desc">Crystal clear scope with deliverables, exclusions, and change‑request policy to prevent scope creep.</div>
+            <div class="row">
+              <small class="muted">.docx • Notion</small>
+              <button class="btn-buy" onclick="alert('Purchased: SOW')">Buy Now</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 5 -->
+        <article class="product">
+          <img src="https://images.unsplash.com/photo-1529336953121-adfecfaffb53?q=80&w=1600&auto=format&fit=crop" alt="Maintenance Contract" />
+          <div class="mask"></div>
+          <div class="bar">
+            <div class="title"><span>Maintenance Contract</span><span class="price">PKR 1,499</span></div>
+            <div class="desc">Turn one‑off builds into recurring revenue. Includes SLAs, response windows, and monthly tiers.</div>
+            <div class="row">
+              <small class="muted">.docx • Google Docs</small>
+              <button class="btn-buy" onclick="alert('Purchased: Maintenance Contract')">Buy Now</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 6 -->
+        <article class="product">
+          <img src="https://images.unsplash.com/photo-1531498860502-7c67cf02f11a?q=80&w=1600&auto=format&fit=crop" alt="Course: Web Dev Sales" />
+          <div class="mask"></div>
+          <div class="bar">
+            <div class="title"><span>Course: Web Dev Sales</span><span class="price">PKR 7,999</span></div>
+            <div class="desc">Short course on prospecting, pitching, and closing web/app clients via IG, FB, and cold DMs. Worksheets included.</div>
+            <div class="row">
+              <small class="muted">Video • Worksheets</small>
+              <button class="btn-buy" onclick="alert('Purchased: Web Dev Sales Course')">Buy Now</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section" id="testimonials">
+    <div class="container">
+      <h2>Loved by Founders & Teams</h2>
+      <p class="lead">Social proof that converts — let your future clients see what others achieved with AR Softech resources.</p>
+
+      <div class="swiper t-swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <article class="testimonial">
+              <div class="t-head">
+                <img class="avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop" alt="Client portrait"/>
+                <div>
+                  <strong>Ali Khan</strong>
+                  <div class="stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="t-quote">“Website Proposal template ne hamari close rate double kar di. Client ko clarity mili, aur hamne 1.2M PKR project close kiya.”</p>
+            </article>
+          </div>
+          <div class="swiper-slide">
+            <article class="testimonial">
+              <div class="t-head">
+                <img class="avatar" src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400&auto=format&fit=crop" alt="Client portrait"/>
+                <div>
+                  <strong>Sara Ahmed</strong>
+                  <div class="stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="t-quote">“App proposal + SOW combo se scope creep khatam. Delivery smooth rahi, profit margin safe.”</p>
+            </article>
+          </div>
+          <div class="swiper-slide">
+            <article class="testimonial">
+              <div class="t-head">
+                <img class="avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop" alt="Client portrait"/>
+                <div>
+                  <strong>Bilal Hussain</strong>
+                  <div class="stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="t-quote">“Business Plan ne hamari funding meetings me impression top‑tier banaya. Templates professional aur practical.”</p>
+            </article>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    © 2025 AR Softech — All rights reserved.
+  </footer>
+
+  <!-- Scripts: Swiper + GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <script>
+    // Feature carousel
+    const featureSwiper = new Swiper('.feature-swiper', {
+      loop: true,
+      spaceBetween: 20,
+      slidesPerView: 1.18,
+      centeredSlides: true,
+      breakpoints: {
+        680: { slidesPerView: 1.6 },
+        980: { slidesPerView: 2.2 },
+        1280: { slidesPerView: 2.6 }
+      },
+      pagination: { el: '.feature-swiper .swiper-pagination', clickable: true }
+    });
+
+    // Testimonial carousel
+    const tSwiper = new Swiper('.t-swiper', {
+      loop: true,
+      autoHeight: true,
+      spaceBetween: 24,
+      slidesPerView: 1,
+      breakpoints: { 860: { slidesPerView: 2 }, 1200: { slidesPerView: 3 } },
+      pagination: { el: '.t-swiper .swiper-pagination', clickable: true }
+    });
+
+    // GSAP entrance animations
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from('.hero h1', { y: 30, opacity: 0, duration: 1, ease: 'power3.out' });
+    gsap.from('.hero p', { y: 20, opacity: 0, duration: .9, delay: .15, ease: 'power3.out' });
+    gsap.from('.hero .cta-row', { y: 16, opacity: 0, duration: .9, delay: .25, ease: 'power3.out' });
+
+    gsap.utils.toArray('.section h2').forEach((el) => {
+      gsap.from(el, { scrollTrigger: { trigger: el, start: 'top 80%' }, y: 20, opacity: 0, duration: .8 });
+    });
+    gsap.utils.toArray('.lead').forEach((el) => {
+      gsap.from(el, { scrollTrigger: { trigger: el, start: 'top 82%' }, y: 12, opacity: 0, duration: .7 });
+    });
+    gsap.utils.toArray('.product').forEach((card, i) => {
+      gsap.from(card, { scrollTrigger: { trigger: card, start: 'top 85%' }, y: 24, opacity: 0, duration: .7, delay: i * 0.04 });
+    });
+
+    // Parallax on hero image
+    const heroMedia = document.querySelector('.hero-media');
+    window.addEventListener('mousemove', (e) => {
+      const rect = heroMedia.getBoundingClientRect();
+      const dx = (e.clientX - rect.left) / rect.width - .5;
+      const dy = (e.clientY - rect.top) / rect.height - .5;
+      heroMedia.style.transform = `translate3d(${dx * 6}px, ${dy * 6}px, 0)`;
+    });
+  </script>
+</body>
+</html>
